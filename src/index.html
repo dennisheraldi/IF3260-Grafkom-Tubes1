@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2D Web Based CAD</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="title">2D Web Based CAD</div>
+        <div class="container">
+            <div class="box left">
+                <div class="h2">Tools</div>
+                <div class="tool">
+                    <button id="btn-square">Square</button>
+                </div>
+            </div>
+            <div class="box center">
+                <canvas
+                    id="canvas"
+                    width="600"
+                    height="600"
+                    style="border: 1px solid black"
+                >
+                    Browser tidak mendukung WebGL
+                </canvas>
+            </div>
+            <div class="box right">
+                <div class="h2">Object List</div>
+                <div class="object-item" id="list-object"></div>
+            </div>
+        </div>
+        <script src="app.js"></script>
+        <script src="shader.js"></script>
+        <script src="program.js"></script>
+        <script src="buffer.js"></script>
+    </body>
+</html>
