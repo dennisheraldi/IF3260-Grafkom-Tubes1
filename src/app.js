@@ -9,13 +9,9 @@ var object = {
 
 var mouseMoveDrawRectangle = false;
 var rectanglePosition = [];
+var rectangleColor = [];
 // prettier-ignore
-var rectangleColor = [
-    1, 0, 1, 
-    1, 0, 1, 
-    1, 0, 1, 
-    1, 0, 1, 
-];
+var currentColor = [0, 0, 1];
 
 // Get the canvas element
 var canvas = document.getElementById("canvas");
@@ -29,8 +25,6 @@ function main() {
         alert("Your browser does not support WebGL");
         return;
     }
-
-    console.log(gl);
     // Setup GLSL program
     var program = createProgram(gl, vertexShaderText, fragmentShaderText);
 
@@ -79,7 +73,7 @@ function main() {
         for (var i = 0; i < object.rectangle.positions.length / 8; i++) {
             setPositionColorBuffer(
                 object.rectangle.positions.slice(i * 8, (i + 1) * 8),
-                rectangleColor
+                object.rectangle.colors.slice(i * 24, (i + 1) * 24)
             );
             gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
         }
@@ -108,6 +102,12 @@ function rectangleButtonHandler() {
     canvas.onmousemove = rectangleMouseMoveHandler;
 }
 
+function colorButtonHandler() {
+    var color = document.getElementById("color").value;
+    // convert hex to rgb array
+    currentColor = hexToRgb(color);
+}
+
 // Drawing on canvas handler
 
 function rectangleMouseDownHandler(e) {
@@ -118,13 +118,18 @@ function rectangleMouseDownHandler(e) {
 
     if (!mouseMoveDrawRectangle) {
         // start drawing
+        // add the first point to the rectanglePosition
         rectanglePosition.push(x_down, y_down);
+        // add the color to the rectangleColor
+        rectangleColor.push(...currentColor, ...currentColor);
     } else {
         // finish drawing
         mouseMoveDrawRectangle = false;
+        console.log(rectangleColor.length);
         object.rectangle.positions.push(...rectanglePosition);
+        object.rectangle.colors.push(...rectangleColor);
         rectanglePosition = [];
-        console.log(object);
+        rectangleColor = [];
     }
 }
 
@@ -142,6 +147,12 @@ function rectangleMouseMoveHandler(e) {
             x_move,y_move,
             rectanglePosition[0],y_move,
         );
+        // prettier-ignore
+        rectangleColor.push( // fill the other 3 points
+            ...currentColor, ...currentColor,
+            ...currentColor, ...currentColor,
+            ...currentColor, ...currentColor,
+        );
     } else if (mouseMoveDrawRectangle) {
         // each time mouse move, update the rectangle
         rectanglePosition[2] = x_move;
@@ -149,6 +160,18 @@ function rectangleMouseMoveHandler(e) {
         rectanglePosition[5] = y_move;
         rectanglePosition[7] = y_move;
     }
+}
+
+// Misc functions
+function hexToRgb(hex) {
+    // parse the hex string
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+    return [
+        parseInt(result[1], 16) / 255,
+        parseInt(result[2], 16) / 255,
+        parseInt(result[3], 16) / 255,
+    ];
 }
 
 window.onload = main;
