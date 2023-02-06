@@ -62,14 +62,7 @@ function main() {
         // Use the program (shaders)
         gl.useProgram(program);
 
-        // Update the position and color buffer
-        // For Rectangle
-        // setPositionColorBuffer(
-        //     object.rectangle.positions,
-        //     object.rectangle.colors
-        // );
-        // var count = Math.floor(object.rectangle.positions.length / 2);
-        // gl.drawArrays(gl.TRIANGLE_FAN, 0, count);
+        // Update the rectangle position and color buffer
         for (var i = 0; i < object.rectangle.positions.length / 8; i++) {
             setPositionColorBuffer(
                 object.rectangle.positions.slice(i * 8, (i + 1) * 8),
@@ -78,6 +71,7 @@ function main() {
             gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
         }
 
+        // Update rectangle when mouse move
         if (rectanglePosition.length == 8) {
             setPositionColorBuffer(rectanglePosition, rectangleColor);
             gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
