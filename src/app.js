@@ -5,12 +5,37 @@ var object = {
         // prettier-ignore
         colors: [],
     },
+    line: {
+        // prettier-ignore
+        positions: [],
+        // prettier-ignore
+        colors: [],
+    },
+};
+
+//Clear
+var clearButton = document.getElementById("clear-button");
+clearButton.onclick = function () {
+    // Clear all arrays in the object
+    object.rectangle.positions = [];
+    object.rectangle.colors = [];
+    object.line.positions = [];
+    object.line.colors = [];
+    rectanglePosition = [];
+    rectangleColor = [];
+    linePosition = [];
+    lineColor = [];
 };
 
 var mouseMoveDrawRectangle = false;
 var rectanglePosition = [];
 var rectangleColor = [];
 // prettier-ignore
+
+var mouseMoveDrawLine = false;
+var linePosition = [];
+var lineColor = [];
+
 var currentColor = [0, 0, 1];
 
 // Get the canvas element
@@ -77,6 +102,21 @@ function main() {
             gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
         }
 
+        // Update the line position and color buffer
+        for (var i = 0; i < object.line.positions.length / 4; i++) {
+            setPositionColorBuffer(
+                object.line.positions.slice(i * 4, (i + 1) * 4),
+                object.line.colors.slice(i * 12, (i + 1) * 12)
+            );
+            gl.drawArrays(gl.LINES, 0, 2);
+        }
+
+        // Update line when mouse move
+        if (linePosition.length == 4) {
+            setPositionColorBuffer(linePosition, lineColor);
+            gl.drawArrays(gl.LINES, 0, 2);
+        }
+
         window.requestAnimationFrame(drawScene);
     }
 
@@ -94,6 +134,12 @@ function rectangleButtonHandler() {
     document.getElementById("selected-tool").innerHTML = "Rectangle";
     canvas.onmousedown = rectangleMouseDownHandler;
     canvas.onmousemove = rectangleMouseMoveHandler;
+}
+
+function lineButtonHandler() {
+    document.getElementById("selected-tool").innerHTML = "Line";
+    canvas.onmousedown = lineMouseDownHandler;
+    canvas.onmousemove = lineMouseMoveHandler;
 }
 
 function colorButtonHandler() {
@@ -155,6 +201,53 @@ function rectangleMouseMoveHandler(e) {
         rectanglePosition[7] = y_move;
     }
 }
+
+function lineMouseDownHandler(e) {
+    var rect = e.target.getBoundingClientRect();
+    // Normalize mouse position
+    var x_down = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    var y_down = ((e.clientY - rect.top) / rect.height) * -2 + 1;
+
+    if (!mouseMoveDrawLine) {
+        // start drawing
+        // add the first point to the linePosition
+        linePosition.push(x_down, y_down);
+        // add the color to the lineColor
+        lineColor.push(...currentColor, ...currentColor);
+    } else {
+        // finish drawing
+        mouseMoveDrawLine = false;
+        object.line.positions.push(...linePosition);
+        object.line.colors.push(...lineColor);
+        linePosition = [];
+        lineColor = [];
+    }
+}
+
+function lineMouseMoveHandler(e) {
+    var rect = e.target.getBoundingClientRect();
+    // Normalize mouse position
+    var x_move = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    var y_move = ((e.clientY - rect.top) / rect.height) * -2 + 1;
+
+    if (!mouseMoveDrawLine && linePosition.length == 2) {
+        mouseMoveDrawLine = true;
+        // prettier-ignore
+        linePosition.push( // fill the other 2 points
+            x_move,y_move,
+        );
+        // prettier-ignore
+        lineColor.push( // fill the other 2 points
+            ...currentColor, ...currentColor,
+        );
+    } else if (mouseMoveDrawLine) {
+        // each time mouse move, update the line
+        linePosition[2] = x_move;
+        linePosition[3] = y_move;
+    }
+}
+
+
 
 // Misc functions
 function hexToRgb(hex) {
