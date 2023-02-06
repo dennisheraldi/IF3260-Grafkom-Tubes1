@@ -12,15 +12,26 @@
         <div class="container">
             <div class="box left">
                 <div class="h2">Tools</div>
+                <div>
+                    <div class="h3">Selected tool:</div>
+                    <div id="selected-tool"></div>
+                </div>
                 <div class="tool">
-                    <button id="btn-square">Square</button>
+                    <button onclick="selectButtonHandler()">Select</button>
+                    <button onclick="rectangleButtonHandler()">
+                        Rectangle
+                    </button>
+                </div>
+                <div>
+                    <div class="h3">Color:</div>
+                    <input type="color" id="color" value="#0091ff" />
                 </div>
             </div>
             <div class="box center">
                 <canvas
                     id="canvas"
-                    width="600"
-                    height="600"
+                    width="600vw"
+                    height="600vh"
                     style="border: 1px solid black"
                 >
                     Browser tidak mendukung WebGL
