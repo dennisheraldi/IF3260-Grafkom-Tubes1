@@ -88,10 +88,10 @@ function main() {
         gl.useProgram(program);
 
         // Update the rectangle position and color buffer
-        for (var i = 0; i < object.rectangle.positions.length / 8; i++) {
+        for (var i = 0; i < object.rectangle.positions.length; i++) {
             setPositionColorBuffer(
-                object.rectangle.positions.slice(i * 8, (i + 1) * 8),
-                object.rectangle.colors.slice(i * 24, (i + 1) * 24)
+                object.rectangle.positions[i],
+                object.rectangle.colors[i]
             );
             gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
         }
@@ -148,6 +148,11 @@ function colorButtonHandler() {
     currentColor = hexToRgb(color);
 }
 
+function fillButtonHandler() {
+    document.getElementById("selected-tool").innerHTML = "Fill";
+    canvas.onmousedown = fillMouseDownHandler;
+}
+
 // Drawing on canvas handler
 
 function rectangleMouseDownHandler(e) {
@@ -161,13 +166,12 @@ function rectangleMouseDownHandler(e) {
         // add the first point to the rectanglePosition
         rectanglePosition.push(x_down, y_down);
         // add the color to the rectangleColor
-        rectangleColor.push(...currentColor, ...currentColor);
+        rectangleColor.push(...currentColor);
     } else {
         // finish drawing
         mouseMoveDrawRectangle = false;
-        console.log(rectangleColor.length);
-        object.rectangle.positions.push(...rectanglePosition);
-        object.rectangle.colors.push(...rectangleColor);
+        object.rectangle.positions.push([...rectanglePosition]);
+        object.rectangle.colors.push([...rectangleColor]);
         rectanglePosition = [];
         rectangleColor = [];
     }
@@ -189,9 +193,9 @@ function rectangleMouseMoveHandler(e) {
         );
         // prettier-ignore
         rectangleColor.push( // fill the other 3 points
-            ...currentColor, ...currentColor,
-            ...currentColor, ...currentColor,
-            ...currentColor, ...currentColor,
+            ...currentColor, 
+            ...currentColor,
+            ...currentColor,
         );
     } else if (mouseMoveDrawRectangle) {
         // each time mouse move, update the rectangle
@@ -247,7 +251,33 @@ function lineMouseMoveHandler(e) {
     }
 }
 
+function fillMouseDownHandler(e) {
+    var rect = e.target.getBoundingClientRect();
+    // Normalize mouse position
+    var x_down = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    var y_down = ((e.clientY - rect.top) / rect.height) * -2 + 1;
 
+    function distance(x1, y1, x2, y2) {
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+
+    // check for each rectangle
+    for (var i = 0; i < object.rectangle.positions.length; i++) {
+        var position = object.rectangle.positions[i];
+        // check for each point in the rectangle
+        for (var p = 0; p < position.length; p++) {
+            if (
+                distance(x_down, y_down, position[p * 2], position[p * 2 + 1]) <
+                0.1
+            ) {
+                // fill the color for corresponding point
+                object.rectangle.colors[i][p * 3] = currentColor[0];
+                object.rectangle.colors[i][p * 3 + 1] = currentColor[1];
+                object.rectangle.colors[i][p * 3 + 2] = currentColor[2];
+            }
+        }
+    }
+}
 
 // Misc functions
 function hexToRgb(hex) {
@@ -260,5 +290,49 @@ function hexToRgb(hex) {
         parseInt(result[3], 16) / 255,
     ];
 }
+
+function pointIsInPoly(p, polygon) {
+    var isInside = false;
+    var minX = polygon[0].x,
+        maxX = polygon[0].x;
+    var minY = polygon[0].y,
+        maxY = polygon[0].y;
+    for (var n = 1; n < polygon.length; n++) {
+        var q = polygon[n];
+        minX = Math.min(q.x, minX);
+        maxX = Math.max(q.x, maxX);
+        minY = Math.min(q.y, minY);
+        maxY = Math.max(q.y, maxY);
+    }
+
+    if (p.x < minX || p.x > maxX || p.y < minY || p.y > maxY) {
+        return false;
+    }
+
+    var i = 0,
+        j = polygon.length - 1;
+    for (i, j; i < polygon.length; j = i++) {
+        if (
+            polygon[i].y > p.y != polygon[j].y > p.y &&
+            p.x <
+                ((polygon[j].x - polygon[i].x) * (p.y - polygon[i].y)) /
+                    (polygon[j].y - polygon[i].y) +
+                    polygon[i].x
+        ) {
+            isInside = !isInside;
+        }
+    }
+
+    return isInside;
+}
+
+console.log(
+    pointIsInPoly({ x: 0.5, y: 0.5 }, [
+        { x: 0, y: 0 },
+        { x: 1, y: 0 },
+        { x: 1, y: 1 },
+        { x: 0, y: 1 },
+    ])
+);
 
 window.onload = main;
