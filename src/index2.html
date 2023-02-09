@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2D Web Based CAD</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="title">2D Web Based CAD</div>
+        <div class="container">
+            <div class="box left">
+                <div class="h2">Tools</div>
+                <div>
+                    <div class="h3">Selected tool:</div>
+                    <div id="selected-tool"></div>
+                </div>
+                <div class="tool">
+                    <!-- <button id="btnSelect" onclick="selectButtonHandler()">Select</button>
+                    <button id="btnRectangle" onclick="rectangleButtonHandler()">Rectangle</button>
+                    <button id="btnLine" onclick="lineButtonHandler()">Line</button> -->
+                    <button id="btnPolygon" onclick="polygonButtonHandler()">Polygon</button>
+                    <!-- <button id="btnFill" onclick="fillButtonHandler()">Fill</button> -->
+                </div>
+                <div class="clear">
+                    <button id="btnClear" onclick="clearButtonHandler()">Clear</button>
+                </div>
+                <div>
+                    <div class="h3">Color:</div>
+                    <input
+                        type="color"
+                        id="color"
+                        value="#0000ff"
+                        onchange="colorButtonHandler()"
+                    />
+                </div>
+            </div>
+            <div class="box center">
+                <canvas
+                    id="canvas"
+                    width="600vw"
+                    height="600vh"
+                    style="border: 1px solid black"
+                >
+                    Browser tidak mendukung WebGL
+                </canvas>
+            </div>
+            <div class="box right">
+                <div class="h2">Object List</div>
+                <div class="object-item" id="list-object"></div>
+            </div>
+        </div>
+        <script src="state.js"></script>
+        <script src="utils.js"></script>
+        <script src="handler.js"></script>
+        <script src="shader.js"></script>
+        <script src="program.js"></script>
+        <script src="buffer.js"></script>
+    </body>
+</html>
