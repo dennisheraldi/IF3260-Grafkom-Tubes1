@@ -18,14 +18,16 @@
                 </div>
                 <div class="tool">
                     <button onclick="selectButtonHandler()">Select</button>
+                    <button onclick="squareButtonHandler()">Square</button>
                     <button onclick="rectangleButtonHandler()">
                         Rectangle
                     </button>
                     <button onclick="lineButtonHandler()">Line</button>
                     <button onclick="fillButtonHandler()">Fill</button>
+                    <button onclick="resizeButtonHandler()">Resize</button>
                 </div>
                 <div class="clear">
-                    <button id="clear-button">Clear</button>
+                    <button onclick="clearButtonHandler()">Clear</button>
                 </div>
                 <div>
                     <div class="h3">Color:</div>
@@ -52,9 +54,21 @@
                 <div class="object-item" id="list-object"></div>
             </div>
         </div>
+        <script src="objects/objects.js"></script>
+        <script src="objects/staticObject.js"></script>
+        <script src="tools/clear.js"></script>
+        <script src="tools/color.js"></script>
+        <script src="tools/fill.js"></script>
+        <script src="tools/line.js"></script>
+        <script src="tools/polygon.js"></script>
+        <script src="tools/rectangle.js"></script>
+        <script src="tools/resize.js"></script>
+        <script src="tools/select.js"></script>
+        <script src="tools/square.js"></script>
+        <script src="webgl/shader.js"></script>
+        <script src="webgl/program.js"></script>
+        <script src="webgl/buffer.js"></script>
+        <script src="utils/utils.js"></script>
         <script src="app.js"></script>
-        <script src="shader.js"></script>
-        <script src="program.js"></script>
-        <script src="buffer.js"></script>
     </body>
 </html>
