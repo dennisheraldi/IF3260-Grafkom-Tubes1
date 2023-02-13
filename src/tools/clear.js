@@ -9,4 +9,8 @@ function clearButtonHandler() {
     rectangleColor = [];
     linePosition = [];
     lineColor = [];
+    squareCenter = [];
+    squarePosition = [];
+    polygonPosition = [];
+    polygonColor = [];
 }

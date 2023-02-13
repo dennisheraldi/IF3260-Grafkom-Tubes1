@@ -16,13 +16,35 @@
                     <div class="h3">Selected tool:</div>
                     <div id="selected-tool"></div>
                 </div>
+
+                <div>
+                    <div class="h3">Drawing tool:</div>
+                    <div class="tool">
+                        <button onclick="lineButtonHandler()">Line</button>
+                        <button onclick="squareButtonHandler()">Square</button>
+                        <button onclick="rectangleButtonHandler()">
+                            Rectangle
+                        </button>
+
+                        <div class="polygon-tool">
+                            <button onclick="polygonButtonHandler()">
+                                Polygon
+                            </button>
+                            <label for="number">Polygon vertex:</label>
+                            <input
+                                id="polygon-vertex"
+                                type="number"
+                                name="number"
+                                value="3"
+                                min="3"
+                                onchange="polygonVertexHandler()"
+                            />
+                        </div>
+                    </div>
+                </div>
+
                 <div class="tool">
                     <button onclick="selectButtonHandler()">Select</button>
-                    <button onclick="squareButtonHandler()">Square</button>
-                    <button onclick="rectangleButtonHandler()">
-                        Rectangle
-                    </button>
-                    <button onclick="lineButtonHandler()">Line</button>
                     <button onclick="fillButtonHandler()">Fill</button>
                     <button onclick="resizeButtonHandler()">Resize</button>
                 </div>
@@ -42,17 +64,17 @@
             <div class="box center">
                 <canvas
                     id="canvas"
-                    width="600vw"
-                    height="600vh"
+                    width="700vw"
+                    height="700vh"
                     style="border: 1px solid black"
                 >
                     Browser tidak mendukung WebGL
                 </canvas>
             </div>
-            <div class="box right">
+            <!-- <div class="box right">
                 <div class="h2">Object List</div>
                 <div class="object-item" id="list-object"></div>
-            </div>
+            </div> -->
         </div>
         <script src="objects/objects.js"></script>
         <script src="objects/staticObject.js"></script>

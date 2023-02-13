@@ -24,7 +24,6 @@ var lineColor = [];
 var mouseMoveDrawSquare = false;
 var squareCenter = [];
 var squarePosition = [];
-var squareColor = [];
 
 var mouseMoveDrawRectangle = false;
 var rectanglePosition = [];
@@ -33,6 +32,8 @@ var rectangleColor = [];
 var mouseMoveDrawPolygon = false;
 var polygonPosition = [];
 var polygonColor = [];
+var currentPolygonVertex = 0;
+var polygonVertex = 3;
 
 var mouseMoveResize = false;
 var resizePosition = [];

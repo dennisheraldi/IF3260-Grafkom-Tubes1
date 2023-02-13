@@ -75,10 +75,10 @@ function main() {
         }
 
         // Update the line position and color buffer
-        for (var i = 0; i < object.line.positions.length / 4; i++) {
+        for (var i = 0; i < object.line.positions.length; i++) {
             setPositionColorBuffer(
-                object.line.positions.slice(i * 4, (i + 1) * 4),
-                object.line.colors.slice(i * 12, (i + 1) * 12)
+                object.line.positions[i],
+                object.line.colors[i]
             );
             gl.drawArrays(gl.LINES, 0, 2);
         }

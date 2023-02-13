@@ -6,32 +6,28 @@ function lineButtonHandler() {
 }
 
 function lineMouseDownHandler(e) {
-    var rect = e.target.getBoundingClientRect();
-    // Normalize mouse position
-    var x_down = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    var y_down = ((e.clientY - rect.top) / rect.height) * -2 + 1;
+    var x_down = getMousePosition(e)[0];
+    var y_down = getMousePosition(e)[1];
 
     if (!mouseMoveDrawLine) {
         // start drawing
         // add the first point to the linePosition
         linePosition.push(x_down, y_down);
         // add the color to the lineColor
-        lineColor.push(...currentColor, ...currentColor);
+        lineColor.push(...currentColor);
     } else {
         // finish drawing
         mouseMoveDrawLine = false;
-        object.line.positions.push(...linePosition);
-        object.line.colors.push(...lineColor);
+        object.line.positions.push([...linePosition]);
+        object.line.colors.push([...lineColor]);
         linePosition = [];
         lineColor = [];
     }
 }
 
 function lineMouseMoveHandler(e) {
-    var rect = e.target.getBoundingClientRect();
-    // Normalize mouse position
-    var x_move = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    var y_move = ((e.clientY - rect.top) / rect.height) * -2 + 1;
+    var x_move = getMousePosition(e)[0];
+    var y_move = getMousePosition(e)[1];
 
     if (!mouseMoveDrawLine && linePosition.length == 2) {
         mouseMoveDrawLine = true;
@@ -41,7 +37,7 @@ function lineMouseMoveHandler(e) {
         );
         // prettier-ignore
         lineColor.push( // fill the other 2 points
-            ...currentColor, ...currentColor,
+            ...currentColor
         );
     } else if (mouseMoveDrawLine) {
         // each time mouse move, update the line
