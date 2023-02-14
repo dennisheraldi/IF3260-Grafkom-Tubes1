@@ -20,19 +20,15 @@ function polygonMouseDownHandler(e) {
         // add the color to the polygonColor
         polygonColor.push(...currentColor);
         currentPolygonVertex++;
-        console.log("Titik ke: ", currentPolygonVertex);
     }
     if (mouseMoveDrawPolygon && currentPolygonVertex < polygonVertex - 1) {
         mouseMoveDrawPolygon = false;
         polygonPosition[polygonPosition.length - 2] = x_down;
         polygonPosition[polygonPosition.length - 1] = y_down;
         currentPolygonVertex++;
-        console.log("Titik ke: ", currentPolygonVertex);
     } else if (currentPolygonVertex == polygonVertex - 1) {
         // finish drawing
         currentPolygonVertex++;
-        console.log("Titik ke: ", currentPolygonVertex, "selesai gambar");
-        console.log("PolygonPosition Click: ", polygonPosition);
         mouseMoveDrawPolygon = false;
         object.polygon.positions.push([...polygonPosition]);
         object.polygon.colors.push([...polygonColor]);
@@ -40,7 +36,6 @@ function polygonMouseDownHandler(e) {
         polygonColor = [];
         currentPolygonVertex = 0;
     }
-    console.log("PolygonPosition Click: ", polygonPosition);
 }
 
 function polygonMouseMoveHandler(e) {
