@@ -44,6 +44,21 @@ function main() {
         // Use the program (shaders)
         gl.useProgram(program);
 
+        // Update the line position and color buffer
+        for (var i = 0; i < object.line.positions.length; i++) {
+            setPositionColorBuffer(
+                object.line.positions[i],
+                object.line.colors[i]
+            );
+            gl.drawArrays(gl.LINES, 0, 2);
+        }
+
+        // Update line when mouse move
+        if (linePosition.length == 4) {
+            setPositionColorBuffer(linePosition, lineColor);
+            gl.drawArrays(gl.LINES, 0, 2);
+        }
+
         // Update the rectangle position and color buffer
         for (var i = 0; i < object.rectangle.positions.length; i++) {
             setPositionColorBuffer(
@@ -74,19 +89,23 @@ function main() {
             gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
         }
 
-        // Update the line position and color buffer
-        for (var i = 0; i < object.line.positions.length; i++) {
+        // Update the polygon position and color buffer
+        for (var i = 0; i < object.polygon.positions.length; i++) {
             setPositionColorBuffer(
-                object.line.positions[i],
-                object.line.colors[i]
+                object.polygon.positions[i],
+                object.polygon.colors[i]
             );
-            gl.drawArrays(gl.LINES, 0, 2);
+            gl.drawArrays(
+                gl.TRIANGLE_FAN,
+                0,
+                object.polygon.positions[i].length / 2
+            );
         }
 
-        // Update line when mouse move
-        if (linePosition.length == 4) {
-            setPositionColorBuffer(linePosition, lineColor);
-            gl.drawArrays(gl.LINES, 0, 2);
+        // Update polygon when mouse move
+        if (polygonPosition.length > 0) {
+            setPositionColorBuffer(polygonPosition, polygonColor);
+            gl.drawArrays(gl.LINE_LOOP, 0, polygonPosition.length / 2);
         }
 
         window.requestAnimationFrame(drawScene);
