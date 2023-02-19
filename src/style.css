@@ -56,3 +56,10 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
+
+.modification_tools {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}

@@ -43,13 +43,19 @@
                     </div>
                 </div>
 
-                <div class="tool">
-                    <button onclick="selectButtonHandler()">Select</button>
-                    <button onclick="fillButtonHandler()">Fill</button>
-                    <button onclick="resizeButtonHandler()">Resize</button>
-                </div>
-                <div class="clear">
-                    <button onclick="clearButtonHandler()">Clear</button>
+                <div class="modification_tools">
+                    <div class="transform_tools">
+                        <div class="h3">Transform tool:</div>
+                        <button onclick="selectButtonHandler()">Select</button>
+                        <button onclick="fillButtonHandler()">Fill</button>
+                        <button onclick="resizeButtonHandler()">Resize</button>
+                    </div>
+                    <div class="other_tools">
+                        <div class="h3">Other tool:</div>
+                        <button onclick="saveButtonHandler()">Save</button>
+                        <button onclick="loadButtonHandler()">Load</button>
+                        <button onclick="clearButtonHandler()">Clear</button>
+                    </div>
                 </div>
                 <div>
                     <div class="h3">Color:</div>
@@ -71,10 +77,10 @@
                     Browser tidak mendukung WebGL
                 </canvas>
             </div>
-            <!-- <div class="box right">
+            <div class="box right">
                 <div class="h2">Object List</div>
                 <div class="object-item" id="list-object"></div>
-            </div> -->
+            </div>
         </div>
         <script src="objects/objects.js"></script>
         <script src="objects/staticObject.js"></script>
@@ -87,6 +93,7 @@
         <script src="tools/resize.js"></script>
         <script src="tools/select.js"></script>
         <script src="tools/square.js"></script>
+        <script src="tools/save_and_load.js"></script>
         <script src="webgl/shader.js"></script>
         <script src="webgl/program.js"></script>
         <script src="webgl/buffer.js"></script>
