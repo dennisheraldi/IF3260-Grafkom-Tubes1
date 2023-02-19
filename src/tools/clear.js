@@ -5,6 +5,8 @@ function clearButtonHandler() {
     object.rectangle.colors = [];
     object.line.positions = [];
     object.line.colors = [];
+    object.polygon.colors = [];
+    object.polygon.positions = [];
     rectanglePosition = [];
     rectangleColor = [];
     linePosition = [];
