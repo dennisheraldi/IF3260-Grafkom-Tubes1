@@ -27,5 +27,21 @@ function saveButtonHandler() {
 }
 
 function loadButtonHandler() {
+  let input = document.getElementById('load-file')
+  let files = input.files;
 
+  if (files.length == 0) {
+      alert("Please select a file.");
+      return;
+  }
+
+  const file = files[0]
+
+  let reader = new FileReader();
+  reader.onload = (e) => {
+    let contents = e.target.result;
+    object = JSON.parse(contents);
+  }
+  reader.onerror = (e) => alert(e.target.error.name)
+  reader.readAsText(file);
 }
