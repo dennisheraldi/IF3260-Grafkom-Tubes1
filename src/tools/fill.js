@@ -15,23 +15,8 @@ function fillMouseDownHandler(e) {
         // check for each point in the line
         for (var p = 0; p < 2; p++) {
             if (
-                (distance(
-                    x_down,
-                    y_down,
-                    position[p * 2],
-                    position[p * 2 + 1]
-                ) <
-                    0.5) &
-                pointIsInPoly(
-                    {
-                        x: x_down,
-                        y: y_down,
-                    },
-                    [
-                        { x: position[0], y: position[1] },
-                        { x: position[2], y: position[3] },
-                    ]
-                )
+                distance(x_down, y_down, position[p * 2], position[p * 2 + 1]) <
+                0.1
             ) {
                 // fill the color for corresponding point
                 object.line.colors[i][p * 3] = currentColor[0];
