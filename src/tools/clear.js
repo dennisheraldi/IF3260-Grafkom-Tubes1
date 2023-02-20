@@ -3,6 +3,8 @@ function clearButtonHandler() {
     canvas.style.cursor = "default";
     object.rectangle.positions = [];
     object.rectangle.colors = [];
+    object.square.positions = [];
+    object.square.colors = [];
     object.line.positions = [];
     object.line.colors = [];
     object.polygon.colors = [];

@@ -91,3 +91,37 @@ function getMousePosition(e) {
 
     return [x, y];
 }
+
+function findVertex(x_down, y_down) {
+    // Check for rectangle
+    for (var i = 0; i < object.square.positions.length; i++) {
+        var position = object.square.positions[i];
+        // check for each point in the square
+        for (var p = 0; p < 4; p++) {
+            if (
+                (distance(
+                    x_down,
+                    y_down,
+                    position[p * 2],
+                    position[p * 2 + 1]
+                ) <
+                    0.05) &
+                pointIsInPoly(
+                    {
+                        x: x_down,
+                        y: y_down,
+                    },
+                    [
+                        { x: position[0], y: position[1] },
+                        { x: position[2], y: position[3] },
+                        { x: position[4], y: position[5] },
+                        { x: position[6], y: position[7] },
+                    ]
+                )
+            ) {
+                // return type of the shape and index of the shape
+                return ["square", i, p];
+            }
+        }
+    }
+}

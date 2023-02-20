@@ -35,11 +35,6 @@ var polygonColor = [];
 var currentPolygonVertex = 0;
 var polygonVertex = document.getElementById("polygon-vertex").value;
 
-var mouseMoveResize = false;
-var resizePosition = [];
-var resizeRectangleIndex = -1;
-var resizeLineIndex = [];
-
 var currentColor = [0, 0, 1];
 
 // class State {
