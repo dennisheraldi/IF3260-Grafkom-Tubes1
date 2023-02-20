@@ -175,6 +175,14 @@ function findVertex(x_down, y_down) {
         var position = object.polygon.positions[i];
         // check for each point in the polygon
         for (var p = 0; p < position.length / 2; p++) {
+            // create an array of points for the polygon
+            var polyPoints = [];
+            for (var j = 0; j < position.length / 2; j++) {
+                polyPoints.push({
+                    x: position[j * 2],
+                    y: position[j * 2 + 1],
+                });
+            }
             if (
                 (distance(
                     x_down,
@@ -188,19 +196,101 @@ function findVertex(x_down, y_down) {
                         x: x_down,
                         y: y_down,
                     },
-                    [
-                        { x: position[0], y: position[1] },
-                        { x: position[2], y: position[3] },
-                        { x: position[4], y: position[5] },
-                        { x: position[6], y: position[7] },
-                        { x: position[8], y: position[9] },
-                        { x: position[10], y: position[11] },
-                        { x: position[12], y: position[13] },
-                        { x: position[14], y: position[15] },
-                    ]
+                    polyPoints
                 )
             ) {
                 return ["polygon", i, p];
+            }
+        }
+    }
+}
+
+function findShape(x_down, y_down) {
+    // check for each line
+    for (var i = 0; i < object.line.positions.length; i++) {
+        var position = object.line.positions[i];
+        // check for each point in the line
+        if (
+            pDistance(
+                x_down,
+                y_down,
+                position[0],
+                position[1],
+                position[2],
+                position[3]
+            )[0] < 0.06
+        ) {
+            return ["line", i];
+        }
+    }
+
+    // check for each square
+    for (var i = 0; i < object.square.positions.length; i++) {
+        var position = object.square.positions[i];
+        // check for each point in the square
+        if (
+            pointIsInPoly(
+                {
+                    x: x_down,
+                    y: y_down,
+                },
+                [
+                    { x: position[0], y: position[1] },
+                    { x: position[2], y: position[3] },
+                    { x: position[4], y: position[5] },
+                    { x: position[6], y: position[7] },
+                ]
+            )
+        ) {
+            return ["square", i];
+        }
+    }
+
+    // check for each rectangle
+    for (var i = 0; i < object.rectangle.positions.length; i++) {
+        var position = object.rectangle.positions[i];
+        // check for each point in the rectangle
+        if (
+            pointIsInPoly(
+                {
+                    x: x_down,
+                    y: y_down,
+                },
+                [
+                    { x: position[0], y: position[1] },
+                    { x: position[2], y: position[3] },
+                    { x: position[4], y: position[5] },
+                    { x: position[6], y: position[7] },
+                ]
+            )
+        ) {
+            return ["rectangle", i];
+        }
+    }
+
+    // check for each polygon
+    for (var i = 0; i < object.polygon.positions.length; i++) {
+        var position = object.polygon.positions[i];
+        // check for each point in the polygon
+        for (var p = 0; p < position.length / 2; p++) {
+            // create an array of points for the polygon
+            var polyPoints = [];
+            for (var j = 0; j < position.length / 2; j++) {
+                polyPoints.push({
+                    x: position[j * 2],
+                    y: position[j * 2 + 1],
+                });
+            }
+            if (
+                pointIsInPoly(
+                    {
+                        x: x_down,
+                        y: y_down,
+                    },
+                    polyPoints
+                )
+            ) {
+                return ["polygon", i];
             }
         }
     }

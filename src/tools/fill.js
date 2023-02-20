@@ -103,6 +103,15 @@ function fillMouseDownHandler(e) {
         var position = object.polygon.positions[i];
         // check for each point in the polygon
         for (var p = 0; p < position.length / 2; p++) {
+            // create an array of points for the polygon
+            var polyPoints = [];
+            for (var j = 0; j < position.length / 2; j++) {
+                polyPoints.push({
+                    x: position[j * 2],
+                    y: position[j * 2 + 1],
+                });
+            }
+
             if (
                 (distance(
                     x_down,
@@ -116,16 +125,7 @@ function fillMouseDownHandler(e) {
                         x: x_down,
                         y: y_down,
                     },
-                    [
-                        { x: position[0], y: position[1] },
-                        { x: position[2], y: position[3] },
-                        { x: position[4], y: position[5] },
-                        { x: position[6], y: position[7] },
-                        { x: position[8], y: position[9] },
-                        { x: position[10], y: position[11] },
-                        { x: position[12], y: position[13] },
-                        { x: position[14], y: position[15] },
-                    ]
+                    polyPoints
                 )
             ) {
                 // fill the color for corresponding point
