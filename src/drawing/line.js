@@ -1,3 +1,7 @@
+var mouseMoveDrawLine = false;
+var linePosition = [];
+var lineColor = [];
+
 function lineButtonHandler() {
     document.getElementById("selected-tool").innerHTML = "Line";
     canvas.style.cursor = "crosshair";

@@ -1,3 +1,7 @@
+var mouseMoveDrawRectangle = false;
+var rectanglePosition = [];
+var rectangleColor = [];
+
 function rectangleButtonHandler() {
     document.getElementById("selected-tool").innerHTML = "Rectangle";
     canvas.style.cursor = "crosshair";
