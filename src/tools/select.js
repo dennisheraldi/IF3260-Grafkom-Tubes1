@@ -107,21 +107,6 @@ function selectMouseMoveHandler(e) {
 
     if (!mouseMoveSelect && selectedShape != "") {
         mouseMoveSelect = true;
-        if (selectedShape == "square") {
-            // rearrange points
-            object.square.positions[selectedShapeIndex] = [];
-            // prettier-ignore
-            object.square.positions[selectedShapeIndex].push(
-                // 0               1
-                x_0, y_0,
-                // 2               3
-                x_0 + kx * radius, y_0,
-                // 4               5
-                x_0 + kx * radius, y_0 + ky * radius,
-                // 6               7
-                x_0, y_0 + ky * radius,
-            );
-        }
     } else if (mouseMoveSelect) {
         if (selectedShape == "line") {
             object.line.positions[selectedShapeIndex][
