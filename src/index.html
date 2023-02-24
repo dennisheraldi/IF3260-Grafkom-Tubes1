@@ -40,6 +40,15 @@
                                 onchange="polygonVertexHandler()"
                             />
                         </div>
+                        <!-- checkbox if polygon want to be convex hull -->
+                        <input
+                            type="checkbox"
+                            id="convex-hull"
+                            name="convex-hull"
+                            value="convex-hull"
+                            onchange="polygonConvexHullHandler()"
+                        />
+                        <label for="convex-hull">Convex Hull</label>
                     </div>
                 </div>
 
@@ -50,7 +59,9 @@
                         <button onclick="moveButtonHandler()">Move</button>
                         <button onclick="fillButtonHandler()">Fill</button>
                         <button onclick="rotateButtonHandler()">Rotate</button>
-                        <button onclick="deleteVertexButtonHandler()">Delete polygon vertex</button>
+                        <button onclick="deleteVertexButtonHandler()">
+                            Delete polygon vertex
+                        </button>
                     </div>
                     <div class="other_tools">
                         <div class="h3">Other tool:</div>

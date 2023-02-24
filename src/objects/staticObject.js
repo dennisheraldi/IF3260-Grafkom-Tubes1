@@ -25,12 +25,6 @@ var mouseMoveDrawRectangle = false;
 var rectanglePosition = [];
 var rectangleColor = [];
 
-var mouseMoveDrawPolygon = false;
-var polygonPosition = [];
-var polygonColor = [];
-var currentPolygonVertex = 0;
-var polygonVertex = document.getElementById("polygon-vertex").value;
-
 var currentColor = [0, 0, 1];
 
 // class State {
