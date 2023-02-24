@@ -23,32 +23,63 @@ function selectMouseDownHandler(e) {
             selectedShape = vertex[0];
             selectedShapeIndex = vertex[1];
             selectedShapePointIndex = vertex[2];
-            x_0 =
-                object.square.positions[selectedShapeIndex][
-                    ((selectedShapePointIndex + 2) % 4) * 2
+            if (selectedShape == "square") {
+                x_0 =
+                    object.square.positions[selectedShapeIndex][
+                        ((selectedShapePointIndex + 2) % 4) * 2
+                    ];
+                y_0 =
+                    object.square.positions[selectedShapeIndex][
+                        ((selectedShapePointIndex + 2) % 4) * 2 + 1
+                    ];
+                x_select =
+                    object.square.positions[selectedShapeIndex][
+                        selectedShapePointIndex * 2
+                    ];
+                y_select =
+                    object.square.positions[selectedShapeIndex][
+                        selectedShapePointIndex * 2 + 1
+                    ];
+                object.square.positions[selectedShapeIndex] = [
+                    x_0,
+                    y_0,
+                    x_select,
+                    y_0,
+                    x_select,
+                    y_select,
+                    x_0,
+                    y_select,
                 ];
-            y_0 =
-                object.square.positions[selectedShapeIndex][
-                    ((selectedShapePointIndex + 2) % 4) * 2 + 1
+            }
+            if (selectedShape == "rectangle") {
+                x_0 =
+                    object.rectangle.positions[selectedShapeIndex][
+                        ((selectedShapePointIndex + 2) % 4) * 2
+                    ];
+                y_0 =
+                    object.rectangle.positions[selectedShapeIndex][
+                        ((selectedShapePointIndex + 2) % 4) * 2 + 1
+                    ];
+                x_select =
+                    object.rectangle.positions[selectedShapeIndex][
+                        selectedShapePointIndex * 2
+                    ];
+                y_select =
+                    object.rectangle.positions[selectedShapeIndex][
+                        selectedShapePointIndex * 2 + 1
+                    ];
+                object.rectangle.positions[selectedShapeIndex] = [
+                    x_0,
+                    y_0,
+                    x_select,
+                    y_0,
+                    x_select,
+                    y_select,
+                    x_0,
+                    y_select,
                 ];
-            x_select =
-                object.square.positions[selectedShapeIndex][
-                    selectedShapePointIndex * 2
-                ];
-            y_select =
-                object.square.positions[selectedShapeIndex][
-                    selectedShapePointIndex * 2 + 1
-                ];
-            object.square.positions[selectedShapeIndex] = [
-                x_0,
-                y_0,
-                x_select,
-                y_0,
-                x_select,
-                y_select,
-                x_0,
-                y_select,
-            ];
+            }
+
             mouseMoveSelect = true;
         }
     } else {
@@ -106,12 +137,10 @@ function selectMouseMoveHandler(e) {
             object.square.positions[selectedShapeIndex][5] = y_0 + ky * radius;
             object.square.positions[selectedShapeIndex][7] = y_0 + ky * radius;
         } else if (selectedShape == "rectangle") {
-            object.rectangle.positions[selectedShapeIndex][
-                selectedShapePointIndex * 2
-            ] = x_move;
-            object.rectangle.positions[selectedShapeIndex][
-                selectedShapePointIndex * 2 + 1
-            ] = y_move;
+            object.rectangle.positions[selectedShapeIndex][2] = x_move;
+            object.rectangle.positions[selectedShapeIndex][4] = x_move;
+            object.rectangle.positions[selectedShapeIndex][5] = y_move;
+            object.rectangle.positions[selectedShapeIndex][7] = y_move;
         } else if (selectedShape == "polygon") {
             object.polygon.positions[selectedShapeIndex][
                 selectedShapePointIndex * 2
