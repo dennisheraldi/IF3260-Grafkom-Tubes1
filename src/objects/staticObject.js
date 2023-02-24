@@ -21,10 +21,6 @@ var mouseMoveDrawLine = false;
 var linePosition = [];
 var lineColor = [];
 
-var mouseMoveDrawSquare = false;
-var squarePosition = [];
-var squareColor = [];
-
 var mouseMoveDrawRectangle = false;
 var rectanglePosition = [];
 var rectangleColor = [];

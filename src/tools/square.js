@@ -1,3 +1,7 @@
+var mouseMoveDrawSquare = false;
+var squarePosition = [];
+var squareColor = [];
+
 function squareButtonHandler() {
     document.getElementById("selected-tool").innerHTML = "Square";
     canvas.style.cursor = "crosshair";
@@ -42,8 +46,11 @@ function squareMouseMoveHandler(e) {
 
         // prettier-ignore
         squarePosition.push( 
+            // 2               3
             x_0 + kx * radius, y_0,
+            // 4               5
             x_0 + kx * radius, y_0 + ky * radius,
+            // 6               7
             x_0, y_0 + ky * radius,
         );
         // prettier-ignore
