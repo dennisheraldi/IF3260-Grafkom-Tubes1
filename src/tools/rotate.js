@@ -34,8 +34,6 @@ function rotateButtonHandler(){
         let inp = document.createElement("input");
         inp.setAttribute("id", "input" + e.shape + e.index);
         inp.setAttribute("type", "text");
-        inp.setAttribute("min", "-360");
-        inp.setAttribute("max", "360");
         inp.value = 0;
         elements.push(lbl, inp);
     });
@@ -55,8 +53,6 @@ function rotateButtonHandler(){
 
     //rotate object with degree input 
 
-    
-    
     btn.onclick = () => {
         let lines = [];
         let squares = [];
