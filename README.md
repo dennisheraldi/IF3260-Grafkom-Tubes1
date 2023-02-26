@@ -1,6 +1,11 @@
 # IF3260-Grafkom-Tubes1
 2D Web Based CAD (Computer-Aided Design) developed with HTML, CSS, and JavaScript using WebGL 
 
+## Kelompok 4 - Kelas K3
+* Hafidz Nur Rahman Ghozali - 13520117
+* Januar Budi Ghifari       - 13520132
+* Fachry Dennis Heraldi     - 13520139
+
 ## Deskripsi 
 Aplikasi 2D Web Based CAD (Computer Aided Design) merupakan aplikasi web yang memungkinkan pengguna untuk mendesain gambar dua dimensi mulai dari garis hingga bidang segi banyak (poligon). Aplikasi ini dibangun menggunakan bahasa pemrograman JavaScript dengan bantuan library WebGL sebagai pemroses grafis agar pengguna dapat menggambar, mengedit, dan memvisualisasikan sejumlah model di atas elemen HTML5 canvas. Adapun fitur/fungsionalitas yang dipenuhi oleh aplikasi ini adalah sebagai berikut. <br>
 * Dapat melakukan fungsi menggambar model beserta metode spesialnya: <br>
